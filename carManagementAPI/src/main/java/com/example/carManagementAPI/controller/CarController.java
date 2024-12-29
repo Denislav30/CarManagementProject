@@ -3,6 +3,7 @@ package com.example.carManagementAPI.controller;
 import com.example.carManagementAPI.dto.CarDTO;
 import com.example.carManagementAPI.model.Car;
 import com.example.carManagementAPI.service.CarService;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class CarController {
   }
 
   @PostMapping
-  public ResponseEntity<Car> createCar(@RequestBody Car car) {
+  public ResponseEntity<Car> createCar(@Valid @RequestBody Car car) {
     return ResponseEntity.ok(carService.createCar(car));
   }
 

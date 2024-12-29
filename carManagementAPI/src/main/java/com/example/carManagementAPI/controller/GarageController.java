@@ -3,6 +3,7 @@ package com.example.carManagementAPI.controller;
 import com.example.carManagementAPI.dto.GarageDTO;
 import com.example.carManagementAPI.model.Garage;
 import com.example.carManagementAPI.service.GarageService;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +36,7 @@ public class GarageController {
   }
 
   @PostMapping
-  public ResponseEntity<Garage> createGarage(@RequestBody Garage garage) {
+  public ResponseEntity<Garage> createGarage(@Valid @RequestBody Garage garage) {
     return ResponseEntity.ok(garageService.createGarage(garage));
   }
 

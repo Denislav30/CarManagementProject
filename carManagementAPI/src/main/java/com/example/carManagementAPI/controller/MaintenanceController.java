@@ -2,6 +2,7 @@ package com.example.carManagementAPI.controller;
 
 import com.example.carManagementAPI.dto.MaintenanceDTO;
 import com.example.carManagementAPI.service.MaintenanceService;
+import jakarta.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class MaintenanceController {
   }
 
   @PostMapping
-  public ResponseEntity<?> createMaintenance(@RequestBody MaintenanceDTO maintenanceDTO) {
+  public ResponseEntity<?> createMaintenance(@Valid @RequestBody MaintenanceDTO maintenanceDTO) {
     return ResponseEntity.ok(maintenanceService.createMaintenance(maintenanceDTO));
   }
 

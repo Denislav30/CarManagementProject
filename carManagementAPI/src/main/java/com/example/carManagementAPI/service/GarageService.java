@@ -2,6 +2,7 @@ package com.example.carManagementAPI.service;
 
 import com.example.carManagementAPI.dto.GarageDTO;
 import com.example.carManagementAPI.model.Garage;
+import com.example.carManagementAPI.model.Maintenance;
 import com.example.carManagementAPI.repository.GarageRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,14 +23,18 @@ public class GarageService {
             garage.getId(),
             garage.getName(),
             garage.getLocation(),
-            garage.getCapacity()))
+            garage.getCapacity(),
+            garage.getMaintenances().stream()
+                .map(Maintenance::getId)
+                .collect(Collectors.toList())
+        ))
         .collect(Collectors.toList());
   }
 
   public GarageDTO getGarageById(Long id) {
     Garage garage = garageRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Garage not found"));
-    return new GarageDTO(garage.getId(), garage.getName(), garage.getLocation(), garage.getCapacity());
+    return new GarageDTO(garage.getId(), garage.getName(), garage.getLocation(), garage.getCapacity(), garage.getMaintenances().stream().map(Maintenance::getId).collect(Collectors.toList()));
   }
 
   public Garage createGarage(Garage garage) {

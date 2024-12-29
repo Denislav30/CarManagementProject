@@ -1,12 +1,24 @@
 package com.example.carManagementAPI.dto;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import jakarta.validation.constraints.NotNull;
 
 public class MaintenanceDTO {
   private Long id;
+
+  @NotNull(message = "Car ID cannot be null")
   private Long carId;
+
+  @NotNull(message = "Garage ID cannot be null")
   private Long garageId;
+
+  @NotNull(message = "Scheduled date cannot be null")
+  @Future(message = "Scheduled date must be in the future")
   private LocalDate scheduledDate;
+
+  @NotBlank(message = "Service type cannot be blank")
   private String serviceType;
 
   public MaintenanceDTO() {

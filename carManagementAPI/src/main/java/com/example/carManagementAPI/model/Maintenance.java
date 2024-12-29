@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -15,12 +18,18 @@ public class Maintenance {
   private Long id;
 
   @ManyToOne
+  @NotNull(message = "Car cannot be null")
   private Car car;
 
   @ManyToOne
+  @NotNull(message = "Garage cannot be null")
   private Garage garage;
 
+  @NotNull(message = "Scheduled date cannot be null")
+  @Future(message = "Scheduled date must be in the future")
   private LocalDate scheduledDate;
+
+  @NotBlank(message = "Service type cannot be blank")
   private String serviceType;
 
   public Long getId() {
